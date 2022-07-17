@@ -43,23 +43,23 @@ export default {
   data: () => {
     return {
       form: {
-        username: "admin",
-        password: "123456",
+        username: 'admin',
+        password: '123456',
       },
       // 表单验证规则
       loginFormRules: {
         username: [
           {
             required: true,
-            message: "请输入账号",
-            trigger: "blur",
+            message: '请输入账号',
+            trigger: 'blur',
           },
         ],
         password: [
           {
             required: true,
-            message: "请输入密码",
-            trigger: "blur",
+            message: '请输入密码',
+            trigger: 'blur',
           },
         ],
       },
@@ -74,25 +74,25 @@ export default {
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return;
-        const result = await this.$http.post("login", this.form);
-        debugger;
+        const result = await this.$http.post('login', this.form);
+
         if (!result.status == 200 || !result.data.meta.status == 200)
           return this.$message.error(
-            result.data ? result.data.meta.msg : "登录失败！"
+            result.data ? result.data.meta.msg : '登录失败！'
           );
 
         this.$message.success(result.data.meta.msg);
 
-        window.sessionStorage.setItem("token", result.data.token);
+        window.sessionStorage.setItem('token', result.data.data.token);
 
-        this.$router.push("./home");
+        this.$router.push('./home');
       });
     },
   },
 
   created() {},
   mounted() {
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener('keydown', (e) => {
       if (e.keyCode === 13) this.login();
     });
   },

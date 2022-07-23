@@ -5,3 +5,12 @@ html,body,#app{
   margin: 0 ;
   padding: 0;
 }
+
+.el-breadcrumb{
+  margin-bottom: .9375rem;
+  font-size: .75rem;
+}
+
+.el-card{
+  box-sizing: 0 .0625rem rgba(0, 0, 0,0.15) !important;
+}

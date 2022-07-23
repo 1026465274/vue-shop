@@ -23,6 +23,8 @@
           :unique-opened="true"
           :collapse="isCollapse"
           :collapse-transition="false"
+          router
+          :default-active="activeIndex"
         >
           <!-- 一级菜单母版区域 -->
           <el-submenu
@@ -35,7 +37,7 @@
               <span>{{ item.authName }}</span>
             </template>
             <el-menu-item
-              :index="node.id + ''"
+              :index="'/' + node.path"
               v-for="node in item.children"
               :key="node.id"
             >
@@ -46,7 +48,9 @@
         </el-menu></el-aside
       >
 
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -58,11 +62,14 @@ export default {
       menulist: [],
       // 是否折叠
       isCollapse: false,
+      activeIndex: '/users',
     };
   },
 
   created() {
     this.getMenulist();
+
+    this.activeIndex = this.$route.path;
   },
 
   methods: {
@@ -112,11 +119,15 @@ export default {
 .el-aside {
   position: relative;
   background-color: #333744;
+  overflow: inherit;
   .el-menu {
     border-right: 0;
   }
   .toggle-button {
     position: absolute;
+    z-index: 999;
+    top: 50%;
+    right: -16px;
   }
 }
 
